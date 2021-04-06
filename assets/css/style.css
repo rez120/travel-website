@@ -1,0 +1,55 @@
+.navbar {
+  background-color: #3894e6;
+}
+.search-btn {
+  border: 1px solid white;
+  color: white;
+}
+
+.footer {
+  background-color: #3894e6;
+  position: relative;
+  top: 100%;
+  min-height: 120px;
+  max-height: 350px;
+}
+
+.destination-form {
+  text-align: center;
+}
+
+.error {
+  color: red;
+  margin: 0px;
+  padding: 0px;
+}
+
+.col {
+  padding: 0;
+  padding-left: 50px !important;
+}
+.card {
+  margin: 20px;
+
+  display: inline-block !important;
+}
+/*
+  .card--img {
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: cover !important; 
+  
+     max-width: 100%;
+    max-height: 100%; 
+     max-width: 100%;
+    max-height: 100%; 
+  } */
+
+/* .flex-container {
+    display: flex;
+    justify-content: space-between;
+  } */
+
+/* .flexbox-item {
+    display: inline-flex;
+  } */
