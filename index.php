@@ -1,7 +1,7 @@
 <?php
     include("./config/db_connect.php");
 
-    $sql = "SELECT * FROM destinations";
+    $sql = "SELECT * FROM destinations ORDER BY created_at";
     $result = mysqli_query($conn,$sql);
     $destinations = mysqli_fetch_all($result,MYSQLI_ASSOC);
     mysqli_free_result($result);
