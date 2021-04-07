@@ -1,4 +1,6 @@
 <?php
+    include("./config/db_connect.php");
+
     $errors = array("name"=>"","company"=>"","flightprice"=>"","hotelprice"=>"","thumbnail"=>"","continent"=>"");
 
     $name = $company = $flightprice = $hotelprice = $thumbnail = $continent = "";
@@ -39,9 +41,24 @@
     }
 
     if(array_filter($errors)){
-
+        
     }else{
-        header("Location: index.php");
+        $name = mysqli_real_escape_string($conn,$_POST["email"]);
+        $country = mysqli_real_escape_string($conn,$_POST["country"]);
+        $company = mysqli_real_escape_string($conn,$_POST["company"]);
+        $flightprice = mysqli_real_escape_string($conn,$_POST["flightprice"]);
+        $hotelprice = mysqli_real_escape_string($conn,$_POST["hotelprice"]);
+        $thumbnail = mysqli_real_escape_string($conn,$_POST["thumbnail"]);
+        $continent = mysqli_real_escape_string($conn,$_POST["continent"]);
+        $description = mysqli_real_escape_string($conn,$_POST["description"]);
+        $sql = "INSERT INTO destinations(name,country,company,flight_price,hotel_price,thumbnail,continent,description) VALUES('$name','$country','$company','$flightprice','$hotelprice','$thumbnail','$continent','$description')";
+
+        if(mysqli_query($conn,$sql)){
+            header("Location: index.php");
+        }else{
+            echo "query error: " . mysqli_error($conn);
+        }
+        
     }
 }
  

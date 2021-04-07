@@ -1,8 +1,5 @@
 <?php
-    $conn = mysqli_connect("localhost","reza","","travel_db");
-    if(!$conn){
-        echo "Connection error: ".mysqli_connect_error();
-    }
+    include("./config/db_connect.php");
 
     $sql = "SELECT * FROM destinations";
     $result = mysqli_query($conn,$sql);
