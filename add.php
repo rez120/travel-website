@@ -1,17 +1,23 @@
+
+
 <?php
     include("./config/db_connect.php");
+    $errors = array("name"=>"","country"=>"","company"=>"","flightprice"=>"","hotelprice"=>"","thumbnail"=>"","continent"=>"","description"=>"");
 
-    $errors = array("name"=>"","company"=>"","flightprice"=>"","hotelprice"=>"","thumbnail"=>"","continent"=>"");
-
-    $name = $company = $flightprice = $hotelprice = $thumbnail = $continent = "";
+    $name = $company = $flightprice = $hotelprice = $thumbnail = $continent = $country= $description = "";
     if(isset($_POST["submit"])){
        
    
     if(empty($_POST["name"])){
         $errors["name"] = "Required";
     }else{
-        echo $_POST["company"];   
+        // echo $_POST["name"];   
         $name = $_POST["name"]; 
+    }
+    if(empty($_POST["country"])){
+        $errors["country"] = "Required";
+    }else{
+        $country = $_POST["country"];
     }
     if(empty($_POST["company"])){
         $errors["company"] = "Required";
@@ -39,11 +45,18 @@
     }else{
         $continent = $_POST["continent"];
     }
+    if(empty($_POST["description"])){
+        $errors["description"] = "Required";
+    }else{
+        $description = $_POST["description"];
+        // echo $_POST["description"];
+    }
+
 
     if(array_filter($errors)){
         
     }else{
-        $name = mysqli_real_escape_string($conn,$_POST["email"]);
+        $name = mysqli_real_escape_string($conn,$_POST["name"]);
         $country = mysqli_real_escape_string($conn,$_POST["country"]);
         $company = mysqli_real_escape_string($conn,$_POST["company"]);
         $flightprice = mysqli_real_escape_string($conn,$_POST["flightprice"]);
@@ -72,7 +85,7 @@
 <br />
       <div class="row">
         <div class="col justify-content-center">
-          <form class="destination-form" action="add.php" method="POST">
+          <form class="destination-form" id="destination-form" action="add.php" method="POST">
             <h4>Add Destination</h4>
             <label for="">Destination Name</label>
             <br />
@@ -85,7 +98,17 @@
                     echo "<br /><br />";
                 }
             ?>
-           
+            <label for="">Country</label>
+            <br />
+            <input type="text" name="country" value="<?php echo htmlspecialchars($country); ?>"/>
+            <?php
+                if($errors["country"]){
+                    echo "<div class='error'>" . $errors["country"] . "</div> <br /> ";
+                }
+                else{
+                    echo "<br /><br />";
+                }
+            ?>
             <label for="">Company Name</label>
             <br />
             <input type="text" name="company" value="<?php echo htmlspecialchars($company); ?>" />
@@ -144,7 +167,18 @@
                     echo "<br /><br />";
                 }
             ?>
-           
+            <label for="">Description</label>
+            <br />
+            <textarea form="destination-form" name="description" cols="22" rows="5" > <?php echo htmlspecialchars($description); ?></textarea>
+            <!-- <input type="text" name="country" /> -->
+            <?php
+                if($errors["description"]){
+                    echo "<div class='error'>" . $errors["description"] . "</div> <br /> ";
+                }
+                else{
+                    echo "<br /><br />";
+                }
+            ?>
             <input
               class="btn btn-primary"
               type="submit"
