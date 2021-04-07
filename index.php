@@ -28,7 +28,7 @@ while($c<count($destinations) ){ $n=0; ?>
 <?php 
 while($c<count($destinations) && $n<2){ ?>
     <div class="card" style="width: 18rem;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Agrigent_BW_2012-10-07_13-09-13.jpg" class="card-img-top" alt="...">
+  <img src="<?php echo htmlspecialchars($destinations[$c]['thumbnail']); ?>" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title"><?php echo htmlspecialchars($destinations[$c]["name"]. ", ". $destinations[$c]["country"]); ?></h5>
     <h5 class="card-title"><?php echo htmlspecialchars($destinations[$c]["company"]); ?></h5>
