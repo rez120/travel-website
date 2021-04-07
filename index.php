@@ -36,7 +36,7 @@ while($c<count($destinations) && $n<2){ ?>
     <h5 class="card-title"><?php echo htmlspecialchars($destinations[$c]["hotel_price"]); ?></h5>
     <p class="card-text"><?php echo htmlspecialchars($destinations[$c]["continent"]); ?></p>
     <p class="card-text"><?php echo htmlspecialchars($destinations[$c]["description"]); ?></p>
-    <a href="#" class="btn btn-primary card--btn">Go somewhere</a>
+    <a href="./detail.php?id=<?php echo $destinations[$c]["id"]; ?>" class="btn btn-primary card--btn">Go somewhere</a>
   </div>
 </div>
 
