@@ -33,6 +33,16 @@
 
   display: inline-block !important;
 }
+
+.detail--card {
+  min-width: 300px;
+  width: 700px;
+  max-width: 700px;
+  background-color: rgb(173, 171, 171);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid black;
+}
 /*
   .card--img {
     background-repeat: no-repeat !important;
