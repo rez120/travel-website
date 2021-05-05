@@ -70,3 +70,9 @@
 .info-wrapper {
   padding: 20px;
 }
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  display: none;
+  width: 0;
+}

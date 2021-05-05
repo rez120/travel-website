@@ -6,13 +6,13 @@
 
     $name = $company = $flightprice = $hotelprice = $thumbnail = $continent = $country= $description = "";
     if(isset($_POST["submit"])){
-       
-   
+
+
     if(empty($_POST["name"])){
         $errors["name"] = "Required";
     }else{
-        // echo $_POST["name"];   
-        $name = $_POST["name"]; 
+        // echo $_POST["name"];
+        $name = $_POST["name"];
     }
     if(empty($_POST["country"])){
         $errors["country"] = "Required";
@@ -49,28 +49,29 @@
 
 
             if(move_uploaded_file($_FILES["thumbnail"]["tmp_name"],$path)){
-                echo $path;
+                // echo $path;
                 $thumbnail = $path;
 
             }else{
-                echo "there was an error";
+                // echo "there was an error";
                 $errors["thumbnail"] = "Required";
             }
 
         }else{
 
-            echo "the file does not exist.";
+            // echo "the file does not exist.";
             $errors["thumbnail"] = "Required";
 
         }
-    
-    
+
+
     }else{
         $errors["thumbnail"] = "Required";
-        echo "file does not exist or is corrupted";
+        // echo "file does not exist or is corrupted";
     }
     if(empty($_POST["continent"])){
         $errors["continent"] = "Required";
+        // echo $_POST["continent"];
     }else{
         $continent = $_POST["continent"];
     }
@@ -83,7 +84,7 @@
 
 
     if(array_filter($errors)){
-        
+
     }else{
         $name = mysqli_real_escape_string($conn,$_POST["name"]);
         $country = mysqli_real_escape_string($conn,$_POST["country"]);
@@ -100,10 +101,10 @@
         }else{
             echo "query error: " . mysqli_error($conn);
         }
-        
+
     }
 }
- 
+
 ?>
 
 
@@ -149,7 +150,7 @@
                     echo "<br /><br />";
                 }
             ?>
-            
+
             <label for="">Flight Price</label>
             <br />
             <input type="text" name="flightprice" value="<?php echo htmlspecialchars($flightprice); ?>" />
@@ -161,7 +162,7 @@
                     echo "<br /><br />";
                 }
             ?>
-          
+
             <label for="">Hotel Price</label>
             <br />
             <input type="text" name="hotelprice" value="<?php echo htmlspecialchars($hotelprice); ?>" />
@@ -173,12 +174,21 @@
                     echo "<br /><br />";
                 }
             ?>
-           
-           
+
+
             <label for="">Continent</label>
             <br />
-            <input type="text" name="continent" value="<?php echo htmlspecialchars($continent); ?>" />
-            <?php 
+            <!-- <input type="text" name="continent" value="<?php echo htmlspecialchars($continent); ?>" /> -->
+            <select name="continent" >
+              <option value="ASIA">Asia</option>
+              <option value="EUROPE">Europe</option>
+              <option value="NORTH AMERICA">North America</option>
+              <option value="SOUTH AMERICA">South America</option>
+              <option value="OCEANA">Oceana</option>
+              <option value="AFRICA">Africa</option>
+              <option value="ANTARCTICA">Antarctica</option>
+            </select>
+            <?php
                 if($errors["continent"]){
                     echo "<div class='error'>" . $errors["continent"] . "</div> <br /> ";
                 }
@@ -198,11 +208,12 @@
                     echo "<br /><br />";
                 }
             ?>
+<label style="margin-bottom: 5px;" for="">Thumbnail</label>
+<label style="background: orange;
+   display: block; width:100px;  font-size: 16px; margin-left: auto; margin-right: auto;border-radius: 15px; cursor: pointer;" for="file"> <p style="padding: 10px 15px 10px 15px; color: white;  ">Upload</p> </label>
 
-<label for="file">Thumbnail</label>
-            <br />
             <!-- <input type="text" name="thumbnail"  /> -->
-            <!-- <button style="display:block;width:120px; height:30px; margin: 5px auto 5px auto;" onclick="document.getElementById('getFile').click()">Your text here</button> -->
+
             <input style="" id="file" type="file" name="thumbnail" value="<?php echo  htmlspecialchars($thumbnail); ?>">
             <?php
                 if($errors["thumbnail"]){
@@ -220,7 +231,7 @@
             />
             <br />
             <br />
-           
+
           </form>
         </div>
       </div>
