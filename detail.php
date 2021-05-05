@@ -19,7 +19,7 @@ include("config/db_connect.php");
         $destination = mysqli_fetch_assoc($result);
         mysqli_free_result($result);
         mysqli_close($conn);
-        print_r($destination);
+        // print_r($destination);
     }
 ?>
 
@@ -27,23 +27,26 @@ include("config/db_connect.php");
 <html lang="en">
 
 <?php include("templates/header.php"); ?>
-
-<h2 class="detail--title"> details </h2>
+<br>
+<h2 class="detail--title" style="text-align:center;"> Details </h2>
+<br>
 <div class="d-flex justify-content-center">
 <div class="detail--card" style="">
 <?php
 if($destination): ?>
 <img class="img-fluid" src="<?php echo $destination["thumbnail"]; ?>" alt="">
-<p><?php echo $destination["name"]; ?></p>
-<p><?php echo $destination["country"]; ?></p>
-<p><?php echo $destination["company"]; ?></p>
-<p><?php echo $destination["flight_price"]; ?></p>
-<p><?php echo $destination["hotel_price"]; ?></p>
-<p><?php echo $destination["continent"]; ?></p>
+<div class="container-fluid info-wrapper">
+<p style="font-weight:bold;font-size:20px;"><?php echo $destination["name"]; ?></p>
+<p style="font-weight:bold;font-size:20px;"><?php echo $destination["country"] . ", ". $destination["continent"]; ?></p>
+<p style="font-weight:bold;font-size:20px;"><?php echo $destination["company"]; ?></p>
+<p style="font-weight:bold;font-size:18px;"><?php echo "Flight Price: ". $destination["flight_price"]; ?></p>
+<p style="font-weight:bold;font-size:18px;"><?php echo "Hotel Price: ". $destination["hotel_price"]; ?></p>
+
 <p><?php echo $destination["description"]; ?></p>
+</div>
 <form action="detail.php" method="POST">
     <input type="hidden" name="id_to_delete" value='<?php echo $destination["id"];?>'>
-    <input type="submit" value="Delete" name="delete">
+    <input style="margin-left: auto; margin-right: auto; display: block; border: none; background-color: crimson;padding: 10px 20px 10px 20px; color: white; font-weight: bold; font-size: 18px; border-radius: 10px; margin-bottom: 18px;" type="submit" value="Delete" name="delete">
 </form>
 <?php else:?>
     <p>no such destinaton</p>

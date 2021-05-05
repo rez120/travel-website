@@ -35,10 +35,39 @@
     else{
         $hotelprice = $_POST["hotelprice"];
     }
-    if(empty($_POST["thumbnail"])){
-        $errors["thumbnail"] = "Required";
+    // if(empty($_POST["thumbnail"])){
+    //     $errors["thumbnail"] = "Required";
+    // }else{
+    //     $thumbnail = $_POST["thumbnail"];
+    //        // echo $_POST["description"];
+    // }
+    if(isset($_FILES["thumbnail"])){
+        var_dump($_FILES["thumbnail"]);
+        if(file_exists($_FILES["thumbnail"]["tmp_name"])){
+            $path = "assets/images/";
+            $path .= $_FILES["thumbnail"]["name"];
+
+
+            if(move_uploaded_file($_FILES["thumbnail"]["tmp_name"],$path)){
+                echo $path;
+                $thumbnail = $path;
+
+            }else{
+                echo "there was an error";
+                $errors["thumbnail"] = "Required";
+            }
+
+        }else{
+
+            echo "the file does not exist.";
+            $errors["thumbnail"] = "Required";
+
+        }
+    
+    
     }else{
-        $thumbnail = $_POST["thumbnail"];
+        $errors["thumbnail"] = "Required";
+        echo "file does not exist or is corrupted";
     }
     if(empty($_POST["continent"])){
         $errors["continent"] = "Required";
@@ -61,7 +90,7 @@
         $company = mysqli_real_escape_string($conn,$_POST["company"]);
         $flightprice = mysqli_real_escape_string($conn,$_POST["flightprice"]);
         $hotelprice = mysqli_real_escape_string($conn,$_POST["hotelprice"]);
-        $thumbnail = mysqli_real_escape_string($conn,$_POST["thumbnail"]);
+        $thumbnail = mysqli_real_escape_string($conn,$path);
         $continent = mysqli_real_escape_string($conn,$_POST["continent"]);
         $description = mysqli_real_escape_string($conn,$_POST["description"]);
         $sql = "INSERT INTO destinations(name,country,company,flight_price,hotel_price,thumbnail,continent,description) VALUES('$name','$country','$company','$flightprice','$hotelprice','$thumbnail','$continent','$description')";
@@ -85,7 +114,7 @@
 <br />
       <div class="row">
         <div class="col justify-content-center">
-          <form class="destination-form" id="destination-form" action="add.php" method="POST">
+          <form class="destination-form" id="destination-form" action="add.php" method="POST" enctype="multipart/form-data">
             <h4>Add Destination</h4>
             <label for="">Destination Name</label>
             <br />
@@ -145,17 +174,7 @@
                 }
             ?>
            
-            <label for="">Thumbnail</label>
-            <br />
-            <input type="text" name="thumbnail" value="<?php echo  htmlspecialchars($thumbnail); ?>" />
-            <?php
-                if($errors["thumbnail"]){
-                    echo "<div class='error'>" . $errors["thumbnail"] . "</div> <br /> ";
-                }
-                else{
-                    echo "<br /><br />";
-                }
-            ?>
+           
             <label for="">Continent</label>
             <br />
             <input type="text" name="continent" value="<?php echo htmlspecialchars($continent); ?>" />
@@ -174,6 +193,20 @@
             <?php
                 if($errors["description"]){
                     echo "<div class='error'>" . $errors["description"] . "</div> <br /> ";
+                }
+                else{
+                    echo "<br /><br />";
+                }
+            ?>
+
+<label for="file">Thumbnail</label>
+            <br />
+            <!-- <input type="text" name="thumbnail"  /> -->
+            <!-- <button style="display:block;width:120px; height:30px; margin: 5px auto 5px auto;" onclick="document.getElementById('getFile').click()">Your text here</button> -->
+            <input style="" id="file" type="file" name="thumbnail" value="<?php echo  htmlspecialchars($thumbnail); ?>">
+            <?php
+                if($errors["thumbnail"]){
+                    echo "<div class='error'>" . $errors["thumbnail"] . "</div> <br /> ";
                 }
                 else{
                     echo "<br /><br />";

@@ -20,7 +20,7 @@
       <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Travel Website</a>
             <button
               class="navbar-toggler"
               type="button"
