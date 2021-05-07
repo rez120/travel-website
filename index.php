@@ -21,7 +21,7 @@
 <p style="text-align:Center; color: grey;"> Available Destinations</p>
 <br>
 <br>
-<?php 
+<?php
 $c = 0;
 while($c<count($destinations) ){ $n=0; ?>
 
@@ -29,7 +29,7 @@ while($c<count($destinations) ){ $n=0; ?>
 
 
 
-<?php 
+<?php
 while($c<count($destinations) && $n<3){ ?>
     <div class="card" style="width: 18rem;">
   <img src="<?php echo htmlspecialchars($destinations[$c]['thumbnail']); ?>" class="card-img-top card--img" alt="...">
@@ -41,7 +41,7 @@ while($c<count($destinations) && $n<3){ ?>
     <p class="card--continent"><?php echo htmlspecialchars($destinations[$c]["continent"]); ?></p>
     <p class="card--description"><?php echo htmlspecialchars($destinations[$c]["description"]); ?></p>
 	  <p class="thumbnail--adress"><?php echo htmlspecialchars($destinations[$c]["thumbnail"]); ?></p>
-    <a href="./detail.php?id=<?php echo $destinations[$c]["id"]; ?>" class="btn btn-primary card--btn">Go to Destination</a>
+    <a style="background-color: #3894e6; border-color: #3894e6;" href="./detail.php?id=<?php echo $destinations[$c]["id"]; ?>" class="btn btn-primary card--btn">Go to Destination</a>
   </div>
 </div>
 
